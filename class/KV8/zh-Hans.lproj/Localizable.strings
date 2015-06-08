@@ -1,0 +1,112 @@
+/* 
+  Localizable.strings
+  KV8
+
+  Created by MasKSJ on 14-8-13.
+  Copyright (c) 2014年 MasKSJ. All rights reserved.
+*/
+"move" = "运动";
+"label2"="产品标签上可找到\"设备ID\"和\"密码\"";
+"label3"="产品标签上可找到\"设备ID\"和\"密码\".\"同步到远端设备\" 需要连接设备.";
+"need"="需要连接设备";
+"fm_ver"="固件版本:";
+"net_mode"="网络模式:";
+"ssid_of_wifi"="设备 Wi-Fi SSID:";
+"name"="名字:";
+"hint1"="您可以输入任何名字，例如：前门";
+"dev_id"="设备 ID:";
+"pwd"="密码:";
+"newpwd"="新密码:";
+"oldpwd"="旧密码:";
+"search_in_lan"="局域网搜索";
+"connected_hint"="设备已连接";
+"connected"="设备已连接";
+"disconnected_hint"="设备未连接";
+"sync_remote"="同步到远端设备";
+"wifi_mode"="局域网模式:";
+"wifi_ssid"="Wi-Fi SSID:";
+"wifi_pwd"="Wi-Fi 密码:";
+"select_ssid"="选择 SSID:";
+"ap_mode"="直连模式:";
+"ap_ssid"="AP SSID:";
+"ap_pwd"="AP 密码:";
+"contrast"="对比度:";
+"brightness"="亮度:";
+"head"="头部";
+"favorite"="收藏";
+"change_info"="修改设备信息";
+"change_para"="修改设备参数";
+"change_network"="修改设备网络模式";
+"about_device"="关于设备";
+"cur_val"="当前值:";
+"change_info1"="修改信息";
+"devices_searched"="搜索设备";
+"select_a_wifi"="选择Wi-Fi";
+"camera_name_not_empty"="设备名字不能为空";
+"device_id_not_empty"="设备ID不能为空";
+"pwd_not_empty"="密码不能为空";
+"change_pwd_success"="修改密码成功";
+"change_pwd_failed"="修改密码失败";
+"save_db_success"="已保存到数据库";
+"save_ok"="设置成功";
+"save_fail"="设置失败";
+"normal"="标清";
+"hd"="高清";
+"have_added"="您已添加该设备";
+"found_devices"="找到 %d 个设备";
+"added_devices"="已添加 %d 个设备";
+"change_s_parameter"="修改设备参数";
+"change_s_network"="修改设备网络";
+"live"="%@(实时视频)";
+"connected"="已连接";
+"disconnected"="断开";
+"connecting"="正在连接";
+"please_wait"="请等待...";
+"searching"="正在搜索设备...";
+"searching_wifi"="正在搜索Wi-Fi...";
+"added"= "(已添加)";
+"screenshot_success"="拍照成功";
+"sending_data"="正在发送数据";
+"screenshot_fail"="拍照未成功";
+"confirm"="确定";
+"add_device"="添加设备";
+"ok"="确定";
+"confirm"="确定";
+"camera" = "镜头";
+"editDevice" = "编辑设备";
+"aboutDevice" = "关于设备";
+"noDeviceEdit"="没有可进行编辑的设备";
+"canNotAccessAlbum1"="无法访问系统相册";
+"canNotAccessAlbum2"="请在iPhone\"设置-隐私-照片\"中允许KV8使用";
+
+//141128   EngelChen
+"power"="待机";
+"power1"="待机";
+"charge"="回充";
+"slow"="慢速";
+"fast"="快速";
+"autoclean"="自动清扫";
+"question"="问题";
+"devices"="设备:";
+"operation"="无法使用!";
+"changewifip"="设备无线模式切换，请进入 设置-WLAN，确认手机处";
+"changewifip2"="之下";
+"openpicture"="图片预览";
+"helpfile"="帮助文档";
+"longfar"="设备与路由器距离太远，连接可能会失败，请将设备移动到路由器附近在重新设置";
+
+//150403 Chris
+"currentTime" = "当前时间";
+"date" = "日期";
+"sunday" = "日";
+"saturday" = "六";
+"Friday" = "五";
+"Thursday" = "四";
+"Wednesday" = "三";
+"Tuesday" = "二";
+"Monday" = "一";
+"Settime" = "设置预约时间";
+"Repetition" = "重复";
+"Bookingclean" = "预约清扫";
+//Set
+"setting" = "正在配置";

@@ -1,0 +1,109 @@
+/* 
+  Localizable.strings
+  Empty
+
+  Created by 李荣 on 15/5/13.
+  Copyright (c) 2015年 李荣. All rights reserved.
+*/
+"label2"="\"Device ID\" and \"Password\" can be found on product label.";
+"label3"="\"Device ID\" and \"Password\" can be found on product label.\"Synchronize to the remote device\" need connect this device.";
+"need"="Need connect this device";
+"fm_ver"="Firmware version:";
+"net_mode"="Network mode:";
+"ssid_of_wifi"="SSID of Device Wi-Fi:";
+"name"="Name:";
+"hint1"="User may enter any name. For example:front door";
+"dev_id"="Device ID:";
+"pwd"="Password:";
+"newpwd"="New Pwd:";
+"oldpwd"="Old Pwd:";
+"search_in_lan"="Search in LAN";
+"connected_hint"="This device is connected";
+"connected"="This device is connected";
+"disconnected_hint"="This device is NOT connected";
+"sync_remote"="Synchronize to the remote device";
+"wifi_mode"="Wi-Fi mode:";
+"wifi_ssid"="Wi-Fi SSID:";
+"wifi_pwd"="Wi-Fi password:";
+"select_ssid"="Select a SSID:";
+"ap_mode"="AP mode:";
+"ap_ssid"="AP SSID:";
+"ap_pwd"="AP password:";
+"contrast"="Contrast:";
+"brightness"="Brightness:";
+"head"="Head";
+"favorite"="My favorite:";
+"change_info"="Change device information";
+"change_para"="Change device parameter";
+"change_network"="Change device network mode";
+"about_device"="About Device";
+"cur_val"="Current value:";
+"change_info1"="CHANGE INFO";
+"devices_searched"="DEVICES SEARCHED";
+"select_a_wifi"="SELECT A Wi-Fi";
+"camera_name_not_empty"="Camera name can not be empty";
+"device_id_not_empty"="Device ID can not be empty";
+"pwd_not_empty"="Password can not be empty";
+"change_pwd_success"="Change password success";
+"change_pwd_failed"="Change password failed";
+"save_db_success"="Save to database";
+"save_ok"="Save OK";
+"save_fail"="Save failed";
+"normal"="Normal";
+"hd"="HD";
+"have_added"="You have added this device.";
+"found_devices"="Found %d devices";
+"added_devices"="Added %d devices";
+"change_s_parameter"="Change Parameter";
+"change_s_network"="Change Device Mode";
+"live"="%@(LIVE)";
+"connected"="Connected";
+"disconnected"="Disconnected";
+"connecting"="Connecting";
+"please_wait"="Please wait...";
+"searching"="Searching devices...";
+"searching_wifi"="Searching Wi-Fis...";
+"added"=" (Added)";
+"screenshot_success"="Screenshot success";
+"sending_data"="Sending data";
+"screenshot_fail"="Screenshot failed";
+"confirm"="Confirm";
+"add_device"="Add Device";
+"ok"="OK";
+"confirm"="Confirm";
+"camera" = "Camera";
+"editDevice" = "Edit Device";
+"aboutDevice" = "About device";
+"noDeviceEdit"="No device can be edited";
+"canNotAccessAlbum1"="Cannot access album";
+"canNotAccessAlbum2"="Make sure you have enabled KV8 in your device's Settings/Privacy/Photos";
+"power"="Power";
+"power1"="Power";
+"charge"="Charge";
+"slow"="Slow";
+"fast"="Fast";
+"autoclean"="Autoclean";
+"question"="Question";
+"devices"="Device:";
+"operation"="unavailable!";
+"changewifip"="设备无线模式切换，请进入 设置-WLAN，确认手机处于";
+"changewifip2"="之下";
+"openpicture"="Preview Picture";
+"helpfile"="Help";
+"longfar"="设备与路由器距离太远，连接可能会失败，请将设备移动到路由器附近在重新设置";
+
+//20150403 Chris
+"currentTime" = "Current Time";
+"date" = "Date";
+"sunday" = "Sun";
+"saturday" = "Sat";
+"Friday" = "Fri";
+"Thursday" = "Thu";
+"Wednesday" = "Wed";
+"Tuesday" = "Tue";
+"Monday" = "Mon";
+"Settime" = "Set Appoinment Time";
+"Repetition" = "Repetition";
+"Bookingclean" = "Booking Clean";
+//Set
+"setting" = "Setting";

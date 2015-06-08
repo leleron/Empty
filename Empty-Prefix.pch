@@ -1,0 +1,56 @@
+//
+//  QianFangGuJie.pch
+//  QianFangGuJie
+//
+//  Created by 余龙 on 14/12/21.
+//  Copyright (c) 2014年 余龙. All rights reserved.
+//
+
+// Include any system framework and library headers here that should be included in all compilation units.
+// You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.
+//
+//  Prefix header
+//
+//  The contents of this file are implicitly included at the beginning of every source file.
+//
+#ifndef EMPTY_PREFIX_H
+#define EMPTY_PREFIX_H
+
+#ifndef __IPHONE_3_0
+#warning "This project uses features only available in iOS SDK 3.0 and later."
+#endif
+
+#ifdef __OBJC__
+#import <UIKit/UIKit.h>
+#import <Foundation/Foundation.h>
+#import <Availability.h>
+#import "const.h"
+#import "Lirong.h"
+
+#endif
+#define SCREEN_HEIGHT ([UIScreen mainScreen].bounds.size.height)
+#define SCREEN_WIDTH ([UIScreen mainScreen].bounds.size.width)
+#define UIColorFromRGB(rgbValue) [UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16))/255.0 green:((float)((rgbValue & 0xFF00) >> 8))/255.0 blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
+
+#define BLUECOLOR ([UIColor colorWithRed:100/255.0 green:184/255.0 blue:236/255.0 alpha:1])
+#define TOPBARCOLOR ([UIColor colorWithRed:27/255.0 green:128/255.0 blue:202/255.0 alpha:1.0])
+
+#define UNAVAILABLECOLOR ([UIColor colorWithRed:200/255.0 green:200/255.0 blue:200/255.0 alpha:1.0])
+#define PATH(name) ([[NSBundle mainBundle]pathForResource:(name) ofType:@"png"])
+#define VERSION @"App Ver. 1.0 Copyright©2014 by Advante."
+#define iOSVERSION [UIDevice currentDevice].systemVersion.floatValue
+#define LOCAL(key) (NSLocalizedString(key, nil))
+#define IMAGE(string) ([UIImage imageWithContentsOfFile:[[NSBundle mainBundle]pathForResource:(string) ofType:@"png"]])
+#define ADJSTHEIGHT 64
+typedef enum {
+    STATUS_TYPE_CHARGE = 100,
+    STATUS_TYPE_STANDBY,
+    STATUS_TYPE_WORK,
+    STATUS_TYPE_SLEEP,
+    STATUS_TYPE_BACK_CHARGE,
+    STATUS_TYPE_ERROR,
+}STATUS_TYPE;
+
+
+
+#endif
