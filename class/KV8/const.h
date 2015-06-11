@@ -16,5 +16,6 @@
 #define FIX_DEVICE_PARAM @"修改设备参数"
 #define FIX_NETWORK_MODE @"修改网络模式"
 #define ABOUT_DEVICE @"关于设备"
-
+#define SAO_YI_SAO @"扫一扫"
+#define ADD_DEVICE @"手动添加"
 #endif

@@ -14,6 +14,9 @@
 -(NSUInteger)count;
 -(NSUInteger)index;
 //-(void)parse:(id)content;
+
+@property(nonatomic,strong)NSString* status;
+@property(nonatomic,strong)NSString* message;
 @property(nonatomic,strong)QUGroupEntity* group;
 @property(nonatomic,assign)UITableViewCellAccessoryType accessoryType; // 箭头
 @property(nonatomic,strong)UIColor* borderLineColor;

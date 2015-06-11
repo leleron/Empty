@@ -147,7 +147,7 @@ DeviceViewController* instance;
     delegate.camDID = @"";
     
     ifAdd = !ifAdd;
-    NSArray *titleArray = [[NSArray alloc] initWithObjects:SEARCH_DEVICE,CONFIG_DEVICE, nil];
+    NSArray *titleArray = [[NSArray alloc] initWithObjects:SAO_YI_SAO,ADD_DEVICE, nil];
     if(drop == nil)
     {
         CGFloat dropDownListHeight = 64; //Set height of drop down list

@@ -210,7 +210,7 @@
     
     WPNSLOG(@"leleron%@",self.operationType);
     
-//    NSMutableDictionary* headDict = [NSMutableDictionary dictionaryWithCapacity:5];
+    NSMutableDictionary* headDict = [NSMutableDictionary dictionaryWithCapacity:1];
 //    NSString* did = [WpCommonFunction getUniqueDeviceIdentifier];
 //    NSUserDefaults* session = [NSUserDefaults standardUserDefaults];
 //    NSString* sseionid = [session valueForKey:JYZD_SESSION_ID];
@@ -220,7 +220,7 @@
 //    [headDict setObject:did?did:@"" forKey:@"x-qfgj-did"];
 //    [headDict setObject:sseionid?sseionid:@"" forKey:@"x-qfgj-sid"];
 //    [headDict setObject:uid?uid:@"" forKey:@"x-qfgj-uid"];
-    
+    [headDict setObject:@"application/json" forKey:@"Content-Type"];
     
     [request setShouldContinueWhenAppEntersBackground:NO];
     // 设置超时时间
@@ -229,7 +229,7 @@
     [request setUseCookiePersistence:NO];
     [request setRequestCookies:[NSMutableArray arrayWithArray:[WCFUser sharedUser].requestCookies]];
     
-//    [request setRequestHeaders:headDict];
+    [request setRequestHeaders:headDict];
     [request startSynchronous];
     [self getRequestError:request];
 }
@@ -258,94 +258,15 @@
 {
     NSString* content = [request responseString];
     
-    // 更新请求的cookies值
-    [WCFUser sharedUser].requestCookies = request.responseCookies;
-    
-    if ([self isShowContent])
-    {
-        if (!([self.operationType isEqualToString:@"/v1/tpo/prices"] || [self.operationType isEqualToString:@"/v1/tpo/price"] || [self.operationType isEqualToString:@"/user/login_repeat"])) {
-            
-            WPNSLOG(@"############\ncontent: %@\nsdk operationType: %@\ncookiesResponse: %@\ncookiesRequest: %@", content, self.operationType, request.responseCookies, request.requestCookies);
-        }
-    }
     
     @try
     {
         if (request.responseStatusCode == 200 && nil != content && content.length > 0 && ![content isEqualToString:@"[]"])
         {
             NSDictionary* rootDict = [[request responseData] objectFromJSONData];
-            
-//            if ([self.operationType isEqualToString:@"/stock/buy_order"]) {
-//                rootDict = @{@"p_id":content};
-//            }
-            
-     //       NSArray* rootArray = [[request responseData] objectFromJSONData];   尝试用NSArray解析
-            
-            NSString *result = [[NSString alloc] initWithData:[request responseData]  encoding:NSUTF8StringEncoding];
-            NSString* temp = @"\"id\"";
-            NSRange range = [result rangeOfString:temp];
-            if (range.length>0) {
-                NSString *newString = [result stringByReplacingOccurrencesOfString:@"\"id\":" withString:@"\"ID\":"];   //将id转为ID
-                NSData *newData = [newString dataUsingEncoding:NSUTF8StringEncoding];
-                rootDict = [newData objectFromJSONData];
-            }
-            
-            
-            if ([result rangeOfString:@"\"init_fund\""].length) {
-                
-                NSString *newString = [result stringByReplacingOccurrencesOfString:@"\"init_fund\":" withString:@"\"Init_fund\":"];   //将id转为ID
-                NSData *newData = [newString dataUsingEncoding:NSUTF8StringEncoding];
-                rootDict = [newData objectFromJSONData];
-            }
-            
-            if (range.length > 0 && [result rangeOfString:@"\"init_fund\""].length) {
-                
-                NSString *newString = [result stringByReplacingOccurrencesOfString:@"\"id\":" withString:@"\"ID\":"];   //将id转为ID
-                newString = [newString stringByReplacingOccurrencesOfString:@"\"init_fund\":" withString:@"\"Init_fund\":"];   //将id转为ID
-                NSData *newData = [newString dataUsingEncoding:NSUTF8StringEncoding];
-                rootDict = [newData objectFromJSONData];
-            }
-            
-            
-            
-            
-         //   NSDictionary* headDict = [rootDict objectForKey:@"head"];
-            
-//            if ([headDict class] == [NSNull class])
-//            {
-//                response.retCode = @"99998";
-//                response.retString = NSLocalizedString(@"ServiceCallError3", @"");
-//            }
-      //      else
-    //        {
-                response.retCode = [[WpCommonFunction JsonStringFromDict:rootDict andKey:@"error_code"] intValue];
-                response.retString = [WpCommonFunction JsonStringFromDict:rootDict andKey:@"error_msg"];
-             //   response.retServiceTime=[WpCommonFunction JsonStringFromDict:headDict andKey:@"serverTime"];
-                response.sessionId = [WpCommonFunction JsonStringFromDict:rootDict andKey:@"session_id"];
-            
-            
-            if (![response.sessionId isEqualToString:@""]) {
-//                NSUserDefaults* sessionId = [NSUserDefaults standardUserDefaults];
-//                [sessionId setObject:response.sessionId forKey:JYZD_SESSION_ID];
-            }
-            
-     //异地设备请求拦截
-            
-            if (response.retCode == 110006) {
-                
-//                exitParam* param = [exitParam param];
-//                exitMock* mock = [exitMock mock];
-//                [mock run:param];    //发出退出请求
-//
 
-
-                
-            }
-            
-    
-                if (response.retCode)
+                if ([rootDict[@"status"] isEqualToString:@"SUCCESS"])
                 {
-                  //  NSDictionary* body = [rootDict objectForKey:@"body"];
                     
                     if([WHStringHelper isNilByValue:rootDict]==YES)
                     {

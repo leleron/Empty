@@ -13,6 +13,7 @@
 @interface WpResponse : NSObject
 
 @property (nonatomic, assign) id adapter;
+@property (strong,nonatomic)NSString* status;
 @property (nonatomic, assign) NSInteger retCode;
 @property (nonatomic, strong) NSString* retString;
 @property (nonatomic, strong) id data;

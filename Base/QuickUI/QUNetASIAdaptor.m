@@ -15,17 +15,7 @@
 #import "WpGlobalOption.h"
 #import "QUNetResponse.h"
 #import "QUURLDownLoadParams.h"
-//#import "IFShemasEntity.h"
 
-//#import "STOSchemasEntity.h"//方案entity
-//#import "STOAvailEntity.h"//最大可买入股数
-//#import "STOBuyStatusEntity.h"//点买进度
-//#import "STOProfitEntity.h"//查询产品动态信息(点卖列表状态)
-//#import "STOSellOrderEntity.h" //点卖确认
-//#import "STOSellStatusEntity.h" //点卖进度
-//#import "STOHotStockEntity.h" //获取热门股
-//#import "AgreementSignagreementEntity.h"//签署协议
-//#import "IFInfoEntity.h"  ///
 
 @implementation QUNetASIAdaptor
 -(void)request:(QUMockParam *)params{
@@ -58,7 +48,10 @@
     
     response.pReason=[[WpGlobalOption sharedOption] serviceCallBackFromApp:response andShowMessage:YES];
     
-    
+    Class cls=[mock getEntityClass];
+
+    response.pEntity=[[[QUJsonParse alloc] init] objFromString:response.pJsonBody withClass:cls withMetmod:[mock getAliasName]];
+
     
     mock.response=response;
     [self.delegate QUNetAdaptor:self response:response];

@@ -77,8 +77,8 @@
         [self showCancelButton];
     else if (self.leftButtonType == kNav_Left_Button_None)
         self.navigationItem.hidesBackButton = YES;
-    else
-        [self showBackButton];
+//    else
+//        [self showBackButton];
     
     
     [self initQuickUI];

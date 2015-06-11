@@ -18,7 +18,7 @@
 @property (nonatomic,assign)NSInteger brightness;
 @property (nonatomic,strong)NSTimer *timer;
 @property (nonatomic,assign)NSInteger Auth_isok;
-
+@property(nonatomic,assign)loginType login_type;
 
 - (id)fetchSSIDInfo;
 

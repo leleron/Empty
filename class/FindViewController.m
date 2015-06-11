@@ -7,7 +7,7 @@
 //
 
 #import "FindViewController.h"
-#import "listSection.h"
+#import "ItemListSection.h"
 #import "serviceViewController.h"
 @interface FindViewController ()
 
@@ -30,13 +30,13 @@
     QUTableView* myTableview = [[QUTableView alloc]initWithFrame:[[UIScreen mainScreen] bounds]];
     [self.view addSubview:myTableview];
     self.pTableView = myTableview;
-    self.pAdaptor = [QUFlatAdaptor adaptorWithTableView:self.pTableView nibArray:@[@"listSection"] delegate:self];
+    self.pAdaptor = [QUFlatAdaptor adaptorWithTableView:self.pTableView nibArray:@[@"ItemListSection"] delegate:self];
     self.pAdaptor.delegate = self;
     QUFlatEntity* entity1 = [QUFlatEntity entity];
     entity1.tag = 0;
     entity1.lineBottomColor = QU_FLAT_COLOR_LINE;
     entity1.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-    [self.pAdaptor.pSources addEntity:entity1 withSection:[listSection class]];
+    [self.pAdaptor.pSources addEntity:entity1 withSection:[ItemListSection class]];
     QUFlatEntity* entity0 = [QUFlatEntity entity];
     entity0.tag = 3;
     [self.pAdaptor.pSources addEntity:entity0 withSection:[QUFlatEmptySection class]];
@@ -45,13 +45,13 @@
     entity2.tag = 1;
     entity2.lineBottomColor = QU_FLAT_COLOR_LINE;
     entity2.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-    [self.pAdaptor.pSources addEntity:entity2 withSection:[listSection class]];
+    [self.pAdaptor.pSources addEntity:entity2 withSection:[ItemListSection class]];
     [self.pAdaptor notifyChanged];
 }
 
 -(void)QUAdaptor:(QUAdaptor *)adaptor forSection:(QUSection *)section forEntity:(QUEntity *)entity{
     if ([entity isKindOfClass:[QUFlatEntity class]]) {
-        listSection* s = (listSection*)section;
+        ItemListSection* s = (ItemListSection*)section;
         if (entity.tag == 0) {
             s.lblTitle.text = @"活动";
         }

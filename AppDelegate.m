@@ -11,8 +11,10 @@
 #import "FindViewController.h"
 #import "UserViewController.h"
 #import "AppDelegate.h"
-#include "TencentOAuth.h"
-@interface AppDelegate ()
+#import "TencentOAuth.h"
+#import "WeiboSDK.h"
+#import "WXApi.h"
+@interface AppDelegate ()<WeiboSDKDelegate,WXApiDelegate>
 
 @end
 
@@ -53,18 +55,43 @@
     item4.title = @"我的";
     
 
+    [WeiboSDK enableDebugMode:YES];
+    [WeiboSDK registerApp:SinaAppKey];
+    [WXApi registerApp:@"wx3023e5007ad774d3"];
     return YES;
 }
 
 
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation{
-    return [TencentOAuth HandleOpenURL:url];
+    if (self.login_type == LOGIN_QQ) {
+        return [TencentOAuth HandleOpenURL:url];
+    }
+    if (self.login_type == LOGIN_WEIBO) {
+        return [WeiboSDK handleOpenURL:url delegate:self];
+    }
+    if (self.login_type == LOGIN_WECHAT) {
+        return [WXApi handleOpenURL:url delegate:self];
+    }
+    return YES;
 }
 
 - (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url{
-    return [TencentOAuth HandleOpenURL:url];
+    if (self.login_type == LOGIN_QQ) {
+        return [TencentOAuth HandleOpenURL:url];
+    }
+    if (self.login_type == LOGIN_WEIBO) {
+        return [WeiboSDK handleOpenURL:url delegate:self];
+    }
+    if (self.login_type == LOGIN_WECHAT) {
+        return [WXApi handleOpenURL:url delegate:self];
+    }
+    return YES;
 }
 
+
+-(void)didReceiveWeiboResponse:(WBBaseResponse *)response{
+    
+}
 
 - (void)applicationWillResignActive:(UIApplication *)application {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.

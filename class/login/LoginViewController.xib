@@ -7,7 +7,13 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="LoginViewController">
             <connections>
+                <outlet property="btnLogin" destination="q5s-oL-STv" id="e9Z-lQ-ydi"/>
                 <outlet property="btnLoginQQ" destination="Vc7-kF-ggr" id="62M-wa-VGj"/>
+                <outlet property="btnLoginWeChat" destination="3sw-7U-kNb" id="dam-9f-NHa"/>
+                <outlet property="btnLoginWeibo" destination="gQE-xe-9aP" id="SrC-fJ-2Ek"/>
+                <outlet property="btnRegister" destination="2hv-8S-L8X" id="EVi-na-VLT"/>
+                <outlet property="textPhoneNum" destination="8EM-TP-r86" id="cT8-Lh-MwE"/>
+                <outlet property="textPsw" destination="SEz-jI-EP2" id="B4P-wL-Xeq"/>
                 <outlet property="view" destination="iN0-l3-epB" id="FKB-dC-MsG"/>
             </connections>
         </placeholder>
@@ -22,12 +28,12 @@
                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="8EM-TP-r86">
+                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="8EM-TP-r86" userLabel="phoneNum">
                     <rect key="frame" x="86" y="110" width="173" height="30"/>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <textInputTraits key="textInputTraits"/>
                 </textField>
-                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="SEz-jI-EP2">
+                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="SEz-jI-EP2" userLabel="psw">
                     <rect key="frame" x="86" y="166" width="173" height="30"/>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <textInputTraits key="textInputTraits"/>
@@ -85,6 +91,12 @@
                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JvA-PB-QCX">
                     <rect key="frame" x="254" y="401" width="46" height="30"/>
                     <state key="normal" title="京东">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="q5s-oL-STv">
+                    <rect key="frame" x="137" y="269" width="46" height="30"/>
+                    <state key="normal" title="登  陆">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                 </button>

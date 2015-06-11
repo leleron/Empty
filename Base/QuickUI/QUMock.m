@@ -17,6 +17,7 @@
 +(instancetype)param{
    QUMockParam *param = [[self alloc] init];
 //    param.interfaceType = @"YP";//夜盘
+    param.sendMethod = @"POST";
     return param;
 }
 

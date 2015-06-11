@@ -10,6 +10,4 @@
 
 @interface getCodeEntity : QUEntity
 @property(strong,nonatomic)NSString* MOBILE;
-@property(strong,nonatomic)NSString* status;
-@property(strong,nonatomic)NSString* message;
 @end

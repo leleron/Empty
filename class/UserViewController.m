@@ -13,6 +13,7 @@
 #import "LoginViewController.h"
 @interface UserViewController ()
 @property (weak, nonatomic) IBOutlet UIButton *btnLogin;   //头像点击按钮
+@property (weak, nonatomic) IBOutlet UILabel *labName;
 
 @end
 
@@ -21,7 +22,6 @@
 - (void)viewDidLoad {
     self.navigationBarTitle = @"用户";
     [super viewDidLoad];
-    self.navigationController.navigationBar.hidden = YES;
     self.pAdaptor = [QUFlatAdaptor adaptorWithTableView:self.pTableView nibArray:@[@"listSection"] delegate:self];
     listEntity* e1 = [listEntity entity];
     e1.image = [UIImage imageNamed:@""];
@@ -74,6 +74,13 @@
     [self.btnLogin addTarget:self action:@selector(clickHead) forControlEvents:UIControlEventTouchUpInside];
     // Do any additional setup after loading the view from its nib.
 }
+
+
+-(void)viewWillAppear:(BOOL)animated{
+    self.navigationController.navigationBar.hidden = YES;
+    self.labName.text = [[WHGlobalHelper shareGlobalHelper]get:USER_PHONENUMBER];
+}
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

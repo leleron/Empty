@@ -9,6 +9,8 @@
 #import "RegisterViewController.h"
 #import "getCodeMock.h"
 #import "AFNetworking.h"
+#import "ASIHTTPRequest.h"
+#import "identifyCodeMock.h"
 @interface RegisterViewController ()
 @property (weak, nonatomic) IBOutlet UITextField *phoneNum;
 @property (weak, nonatomic) IBOutlet UITextField *vertifyCode;
@@ -20,6 +22,8 @@
 @property(strong,nonatomic)NSString*psw;
 @property(strong,nonatomic)getCodeMock* myCodeMock;
 @property(strong,nonatomic)getCodeParam* myCodeParam;
+@property(strong,nonatomic)identifyCodeMock* myIdentifyCodeMock;
+@property(strong,nonatomic)identifyCodeParam* myIndentifyCodeParam;
 @end
 
 @implementation RegisterViewController
@@ -43,30 +47,23 @@
     self.myCodeMock.delegate = self;
     self.myCodeParam = [getCodeParam param];
     self.myCodeParam.sendMethod = @"POST";
-    self.myCodeParam.MOBILE = self.phoneNum.text;
+    self.myIdentifyCodeMock = [identifyCodeMock mock];
+    self.myIdentifyCodeMock.delegate = self;
+    self.myIndentifyCodeParam = [identifyCodeParam param];
 }
 
 -(void)getCode{
-//    self.phone = self.phoneNum.text;
-//    self.myCodeParam.MOBILE = self.phone;
-//    [self.myCodeMock run:self.myCodeParam];
-    AFHTTPRequestOperationManager* manager = [[AFHTTPRequestOperationManager alloc]init];
-    NSMutableString* url = [[NSMutableString alloc]initWithString:BASE_URL];
-//    [url appendString:@"/user/check"];
-    NSDictionary* dic = [[NSDictionary alloc]initWithObjects:@[@"15021631445"] forKeys:@[@"MOBILE"]];
-    [manager POST:url parameters:dic success:^(AFHTTPRequestOperation* operation, id responseObject){
-        NSDictionary *rootDic = [NSJSONSerialization JSONObjectWithData:operation.responseData options:NSJSONReadingMutableLeaves error:nil];
-        
-    } failure:^(AFHTTPRequestOperation* operation, NSError *error){
-        NSLog(@"%@",error);
-    }];
-    
+    self.phone = self.phoneNum.text;
+    self.myCodeParam.MOBILE = self.phone;
+    [self.myCodeMock run:self.myCodeParam];
 }
+
 
 -(void)register{
     self.phone = self.phoneNum.text;
     self.vertifyNum = self.vertifyCode.text;
     self.psw = self.passWord.text;
+    
 }
 
 

@@ -15,6 +15,7 @@
 #import "EditModeController.h"
 #import "AppDelegate.h"
 #import "AboutDeviceController.h"
+#import "chooseScanViewController.h"
 @implementation SKDropDown
 
 - (id)showDropDown:(UIButton *)b withHeight:(CGFloat *)height withData:(NSArray *)arr animationDirection:(NSString *)direction withFrameHeight:(CGFloat*)frameHeight withFrameWidth:(CGFloat*)frameWidth{
@@ -152,17 +153,11 @@
     }
     if ([title isEqualToString:SEARCH_DEVICE])
     {
-        NSLog(@"0");
         [[DeviceViewController share].navigationController pushViewController:_add animated:YES];
         NSLog(@"140:%@",[DeviceViewController share].navigationController);
     }
-    if([title isEqualToString:CONFIG_DEVICE])
-    {
-        NSLog(@"1");
-
-        [[DeviceViewController share].navigationController pushViewController:_set animated:YES];
-    }
-    if ([title isEqualToString:OPEN_PICTURE]) {
+    
+        if ([title isEqualToString:OPEN_PICTURE]) {
         UIImagePickerController *ipc = [[UIImagePickerController alloc] init];
         ipc.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
 //        ipc.delegate = self;
@@ -216,6 +211,22 @@
         }
 
     }
+    //扫一扫
+    if ([title isEqualToString:SAO_YI_SAO]) {
+        chooseScanViewController* controller = [[chooseScanViewController alloc]initWithNibName:@"chooseScanViewController" bundle:nil];
+        [[DeviceViewController share].navigationController pushViewController:controller animated:YES];
+        
+    }
+    //手动配网
+    if([title isEqualToString:ADD_DEVICE])
+    {
+        
+        [[DeviceViewController share].navigationController pushViewController:_set animated:YES];
+    }
+
+    
+    
+    
     [self hideDropDown:_btnSender];
 
     [self myDelegate];

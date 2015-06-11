@@ -25,7 +25,7 @@
 #elif defined(WP_LINKTEST_SERVER) // 联调测试环境
 #define BASE_URL @"http://121.40.104.203:8080/UserCore/service/"
 #else // 生产环境
-#define BASE_URL @"http://192.168.1.108/UserCore/service/user/check"
+#define BASE_URL @"http://121.40.104.203:8080/UserCore/service"
 #endif
 
 #define kReachHostUrl @"www.sina.com.cn"
@@ -101,12 +101,11 @@
 
 
 // Sina SDK相关
-#define SinaAppKey                  @"871684547"
-#define SinaAppSecret               @"f5b31b00450c5838790777ab0305939c"
+#define SinaAppKey                  @"1680146197"
+#define SinaAppSecret               @"3bbcd02b685b4fa39afb3549c42d32ef"
 #define SinaRedirectURI             @"https://api.weibo.com/oauth2/default.html"
 
 // 友盟APPKey
-#define UMENG_APPKEY @"5357353e56240b2f810855c1"
 
 
 
