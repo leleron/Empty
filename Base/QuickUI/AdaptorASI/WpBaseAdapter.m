@@ -157,28 +157,6 @@
 - (void)main
 {
     
-    NSString *url2 = @"http://192.168.5.96:8115";
-    NSString *url = @"http://192.168.5.96:8116";
-    
-#if defined(WP_TEST_SERVER) // 测试环境
-    
-    url2 = @"http://192.168.5.96:8115";
-    url = @"http://192.168.5.96:8116";
-    
-#elif defined(WP_DEVELOP_SERVER) // 开发环境
-    
-    url2 = @"http://openpro.jyzd.sina.com";
-    url = @"http://openuser.jyzd.sina.com";
-    
-#elif defined(WP_LINKTEST_SERVER) // 联调测试环境
-    
-#else // 生产环境
-    
-    url2 = @"http://openpro.jyzd.sina.com";
-    url = @"http://openuser.jyzd.sina.com";
-    
-#endif
-    
     
     ASIFormDataRequest* request = [[ASIFormDataRequest alloc] initWithURL:nil];
     

@@ -17,5 +17,8 @@
     // Drawing code
 }
 */
+-(void)drawRect:(CGRect)rect{
+    self.frame = CGRectMake(0, 0, SCREEN_WIDTH, 50);
+}
 
 @end

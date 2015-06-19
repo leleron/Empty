@@ -38,19 +38,19 @@
 
 -(void)fillParent{
     /*
-    CGRect tableRect=self.pAdaptor.pTableView.frame;
-    if(tableRect.size.width==self.frame.size.width && tableRect.size.height==self.frame.size.height)
-    {
-        return;
-    }
-    
-    self.frame=CGRectMake(self.frame.origin.x, self.frame.origin.y, self.pAdaptor.pTableView.frame.size.width, self.pAdaptor.pTableView.frame.size.height);
-    
-    NSString* clsName=NSStringFromClass([self class]);
-    QUSectionInfo* info=[self.pAdaptor.pSectionInfo objectForKey:clsName];
-    info.frame=self.frame;
-    
-    [self.pAdaptor.pTableView reloadData];
+     CGRect tableRect=self.pAdaptor.pTableView.frame;
+     if(tableRect.size.width==self.frame.size.width && tableRect.size.height==self.frame.size.height)
+     {
+     return;
+     }
+     
+     self.frame=CGRectMake(self.frame.origin.x, self.frame.origin.y, self.pAdaptor.pTableView.frame.size.width, self.pAdaptor.pTableView.frame.size.height);
+     
+     NSString* clsName=NSStringFromClass([self class]);
+     QUSectionInfo* info=[self.pAdaptor.pSectionInfo objectForKey:clsName];
+     info.frame=self.frame;
+     
+     [self.pAdaptor.pTableView reloadData];
      */
     
     CGRect tableRect=self.pAdaptor.pTableView.frame;
@@ -69,19 +69,19 @@
     [self.pAdaptor.pTableView reloadData];
     
     
-//    CGRect tableRect=self.pAdaptor.pTableView.frame;
-//    
-//    NSString* clsName=NSStringFromClass([self class]);
-//    QUSectionInfo* info=[self.pAdaptor.pSectionInfo objectForKey:clsName];
-//
-//    if(tableRect.size.width==info.frame.size.width && tableRect.size.height==info.frame.size.height)
-//    {
-//        return;
-//    }
-//    
-//    self.frame=CGRectMake(info.frame.origin.x, info.frame.origin.y, info.frame.size.width, info.frame.size.height);
-//    
-//    [self.pAdaptor.pTableView reloadData];
+    //    CGRect tableRect=self.pAdaptor.pTableView.frame;
+    //
+    //    NSString* clsName=NSStringFromClass([self class]);
+    //    QUSectionInfo* info=[self.pAdaptor.pSectionInfo objectForKey:clsName];
+    //
+    //    if(tableRect.size.width==info.frame.size.width && tableRect.size.height==info.frame.size.height)
+    //    {
+    //        return;
+    //    }
+    //
+    //    self.frame=CGRectMake(info.frame.origin.x, info.frame.origin.y, info.frame.size.width, info.frame.size.height);
+    //
+    //    [self.pAdaptor.pTableView reloadData];
 }
 
 
@@ -125,7 +125,7 @@
 /** 获取某个类别数组 */
 -(NSArray*)viewWithClass:(Class)viewClass{
     NSMutableArray* array=[NSMutableArray arrayWithCapacity:10];
-
+    
     for (UIView *aView in [self subviews])  // 四层搜索
     {
         if([aView isMemberOfClass:viewClass])

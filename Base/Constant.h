@@ -2,8 +2,8 @@
 //  Constant.h
 //  CaoPanBao
 //
-//  Created by QDS on 14-12-9.
-//  Copyright (c) 2014年 weihui. All rights reserved.
+//  Created by leron on 14-12-9.
+//  Copyright (c) 2014年 李荣. All rights reserved.
 //
 
 #ifndef CaoPanBao_Constant_h
@@ -19,11 +19,11 @@
 #endif
 
 #if defined(WP_TEST_SERVER) // 测试环境
-#define BASE_URL @"http://121.40.104.203:8080/UserCore/service/"
+#define BASE_URL @"http://121.40.104.203:8080/UserCore/service"
 #elif defined(WP_DEVELOP_SERVER) // 开发环境
-#define BASE_URL @"http://121.40.104.203:8080/UserCore/service/"
+#define BASE_URL @"http://121.40.104.203:8080/UserCore/service"
 #elif defined(WP_LINKTEST_SERVER) // 联调测试环境
-#define BASE_URL @"http://121.40.104.203:8080/UserCore/service/"
+#define BASE_URL @"http://121.40.104.203:8080/UserCore/service"
 #else // 生产环境
 #define BASE_URL @"http://121.40.104.203:8080/UserCore/service"
 #endif
@@ -104,6 +104,11 @@
 #define SinaAppKey                  @"1680146197"
 #define SinaAppSecret               @"3bbcd02b685b4fa39afb3549c42d32ef"
 #define SinaRedirectURI             @"https://api.weibo.com/oauth2/default.html"
+
+
+//WeChat SDK相关
+
+
 
 // 友盟APPKey
 
@@ -216,15 +221,15 @@
 /* 列表一次请求的最大数   */
 #define request_limit 20
 
-
+#define LOGIN_PHONE_SUCCESS @"login_phone_success"
 
 //用户信息保存key
 #define USER_INFO @"userinfo"
 #define USER_NICKNAME @"user_NickName"
 #define USER_PHONENUMBER @"user_phonenumber"
 #define USER_TOUXIANG @"user_touxiang"
-#define USER_ID @"user_id"
-#define USER_SESSIONID @"user_sessionid"
+#define USER_ID @"user_id"              //第三方登陆获取的userid
+#define USER_TOKENID @"user_tokenid"   //用户tokenid
 //消息轮查保存key
 #define MESSAGE_TIME @"message_time"
 

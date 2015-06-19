@@ -24,7 +24,7 @@
     self=[super init];
     
     self.accessoryType=UITableViewCellAccessoryNone;
-    self.selectionStyle=UITableViewCellSelectionStyleBlue;
+    self.selectionStyle=UITableViewCellSelectionStyleNone;
     self.separatorInset=UIEdgeInsetsMake(0, 15, 0, 0);
 
     _key=[NSString stringWithFormat:@"%f",[[[NSDate alloc]init] timeIntervalSince1970]];

@@ -35,18 +35,18 @@
 {
     self.view.backgroundColor = [UIColor blackColor];
     self.viewWeb.backgroundColor=[UIColor blackColor];
-
+    
     [super viewDidLoad];
     
     self.viewWeb.delegate=self;
-//    
+    //
     [[ViewControllerManager sharedManager] showWaitView:self.navigationController.view];
-//
-//    
+    //
+    //
     NSURL* website=[NSURL URLWithString:self.url];
     NSURLRequest* request=[NSURLRequest requestWithURL:website];
     [self.viewWeb loadRequest:request];
-//    self.viewWeb.scrollView.scrollEnabled = NO;
+    
     // Do any additional setup after loading the view from its nib.
 }
 

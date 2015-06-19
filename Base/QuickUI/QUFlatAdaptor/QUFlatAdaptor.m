@@ -31,7 +31,7 @@
     
     [array addObject:@"QUFlatEmptySection"]; // attach QUFlatEmptySection.xib
     [array addObject:@"QUFlatSection"]; // attach QUFlatEmptySection.xib
-
+    
     [super bindSource:sources andTableView:tableView nibArray:array];
 }
 
@@ -56,7 +56,7 @@
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:sectionClassName];
     
-//    QULog(@"row:%d",indexPath.row);
+    //    QULog(@"row:%d",indexPath.row);
     
     if (cell == nil) {
         
@@ -64,7 +64,7 @@
         
         cell=[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:sectionClassName];
         
-      
+        
         QUSection* section;
         
         /** 如果实现了自定义Section初始化委托，用于notifyChangeForSection 时，复用现有Section */
@@ -77,7 +77,7 @@
         
         else
             section= [QUNibHelper loadNibArray:self.pNibNameArray ofClass:cls];
-
+        
         
         if(!section)
             QULog(@"QUNibHelper: failed to load nib");
@@ -89,28 +89,28 @@
         CGRect window = [[UIScreen mainScreen] bounds];
         frame.size.width = window.size.width;
         cell.contentView.frame = frame;          //将contentView设置成屏幕宽度
-//        cell.contentView.frame=section.frame;
+        //        cell.contentView.frame=section.frame;
         
-     
+        
         
         float cellWidth=cell.contentView.frame.size.width;
-
         
-//        float iosVer=[[[UIDevice currentDevice] systemVersion] floatValue];
-//        if(iosVer>=7.f) // must be ios7+
-//            cell.separatorInset=et.separatorInset;
+        
+        //        float iosVer=[[[UIDevice currentDevice] systemVersion] floatValue];
+        //        if(iosVer>=7.f) // must be ios7+
+        //            cell.separatorInset=et.separatorInset;
         
         {
             
-//            if(!et.selectedBgColor)
-//                et.selectedBgColor=[UIColor clearColor];
+            //            if(!et.selectedBgColor)
+            //                et.selectedBgColor=[UIColor clearColor];
             
             if(!et.borderLineColor)
                 et.borderLineColor=[UIColor clearColor];
             
             //取消选中颜色
-//            UIView *backView = [[UIView alloc] initWithFrame:cell.frame];
-//            backView.backgroundColor=QU_FLAT_COLOR_CELL_BG_SELECTED ;//et.selectedBgColor;
+            //            UIView *backView = [[UIView alloc] initWithFrame:cell.frame];
+            //            backView.backgroundColor=QU_FLAT_COLOR_CELL_BG_SELECTED ;//et.selectedBgColor;
             
             cell.selectedBackgroundView = [[UIView alloc] initWithFrame:cell.frame];
             cell.selectedBackgroundView.backgroundColor = et.selectedBgColor;
@@ -122,7 +122,7 @@
             
             QUFlatLine* line=[[lineTopClass alloc] initWithFrame:CGRectMake(0,0, cellWidth, 1.f)];
             line.backgroundColor=[UIColor clearColor];
-//            line.lineColor=[UIColor colorWithRed:200.f/255.f green:200.f/255.f blue:200.f/255.f alpha:1.f];
+            //            line.lineColor=[UIColor colorWithRed:200.f/255.f green:200.f/255.f blue:200.f/255.f alpha:1.f];
             line.tag=0;
             section.line_top=line;
             [section addSubview:line];
@@ -130,7 +130,7 @@
             // bottom line
             QUFlatLine* line2=[[lineBottomClass alloc] initWithFrame:CGRectMake(0,section.frame.size.height-1, cellWidth, 1.f)];
             line2.backgroundColor=[UIColor clearColor];
-//            line2.lineColor=[UIColor colorWithRed:200.f/255.f green:200.f/255.f blue:200.f/255.f alpha:1.f];
+            //            line2.lineColor=[UIColor colorWithRed:200.f/255.f green:200.f/255.f blue:200.f/255.f alpha:1.f];
             line2.tag=1;
             section.line_bottom=line2;
             
@@ -138,7 +138,7 @@
             
             [section addSubview:line2];
             
-
+            
             //取消边框线
             [cell setBackgroundView:[[UIView alloc] init]];          //取消边框线
             cell.backgroundColor = et.borderLineColor;
@@ -169,16 +169,16 @@
     section.entity=et;
     
     et.pSection=section;
-//    
+    //
     section.line_top.hidden=YES;
     section.line_bottom.hidden=YES;
     
     cell.accessoryType = et.accessoryType; //显示最右边的箭头
     cell.selectionStyle=et.selectionStyle;
-//
+    //
     
     QUSectionInfo* info=[self.pSectionInfo objectForKey:NSStringFromClass(section.class)];
-
+    
     if(et.LineTopColor) // 如果存在顶边线，则整体高度+1像素
     {
         section.line_top.hidden=NO;
@@ -191,7 +191,7 @@
     else // 否则只存在底边线，则整体高度+0.5像素
     {
         section.frame=CGRectMake(section.frame.origin.x, section.frame.origin.y, section.frame.size.width,info.frame.size.height+0.5f);
-
+        
         section.line_bottom.frame=CGRectMake(0, section.frame.size.height-.5f, section.frame.size.width,0.5f);
     }
     
@@ -217,12 +217,12 @@
         if(et.lineBottomColor)
             section.line_bottom.lineColor=et.lineBottomColor;
     }
-      
+    
     if(self.delegate)
     {
         
         [section layoutSection];
-
+        
         if([self.delegate respondsToSelector:@selector(QUAdaptor:forSection:forEntity:)])
         {
             [self.delegate QUAdaptor:self forSection:section forEntity:et];
@@ -232,11 +232,11 @@
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-
+    
     
     QUEntity* et=[self.pSources entityAtSection:indexPath.section rows:indexPath.row];
     
-//    NSString* sectionClassName=[self.pSources sectionAtIndex:indexPath.section];
+    //    NSString* sectionClassName=[self.pSources sectionAtIndex:indexPath.section];
     
     NSString* sectionClassName=[self.pSources sectionAtKey:et.key];
     

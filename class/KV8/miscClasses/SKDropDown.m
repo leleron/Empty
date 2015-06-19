@@ -16,6 +16,7 @@
 #import "AppDelegate.h"
 #import "AboutDeviceController.h"
 #import "chooseScanViewController.h"
+#import "addProductViewController.h"
 @implementation SKDropDown
 
 - (id)showDropDown:(UIButton *)b withHeight:(CGFloat *)height withData:(NSArray *)arr animationDirection:(NSString *)direction withFrameHeight:(CGFloat*)frameHeight withFrameWidth:(CGFloat*)frameWidth{
@@ -221,7 +222,8 @@
     if([title isEqualToString:ADD_DEVICE])
     {
         
-        [[DeviceViewController share].navigationController pushViewController:_set animated:YES];
+        addProductViewController* controller = [[addProductViewController alloc]initWithNibName:@"addProductViewController" bundle:nil];
+        [[DeviceViewController share].navigationController pushViewController:controller animated:YES];
     }
 
     

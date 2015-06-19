@@ -14,7 +14,10 @@
 #import "TencentOAuth.h"
 #import "WeiboSDK.h"
 #import "WXApi.h"
-@interface AppDelegate ()<WeiboSDKDelegate,WXApiDelegate>
+#import "UserInfo.h"
+#import "ASIHTTPRequest.h"
+#import "MyWebViewController.h"
+@interface AppDelegate ()<WXApiDelegate,WeiboSDKDelegate>
 
 @end
 
@@ -26,7 +29,8 @@
     // Override point for customization after application launch.
     UITabBarController* tabBarController = [[UITabBarController alloc]init];
     self.window.rootViewController = tabBarController;
-    ShopViewController* controller1 = [[ShopViewController alloc]init];
+//    ShopViewController* controller1 = [[ShopViewController alloc]initWithNibName:@"ShopViewController" bundle:nil];
+    MyWebViewController* controller1 = [MyWebViewController controllerWithUrl:@"http://test.flyco.com/"];
     UINavigationController* nav1 = [[UINavigationController alloc]initWithRootViewController:controller1];
     nav1.navigationBar.tintColor = [UIColor colorWithRed:200/255.0f green:200/255.0f  blue:184/255.0f alpha:1.0f];
     [itemViewControllers addObject:nav1];
@@ -88,10 +92,35 @@
     return YES;
 }
 
-
+#pragma weiboSDKDelegate
 -(void)didReceiveWeiboResponse:(WBBaseResponse *)response{
-    
+    UserInfo* myUserInfo = [[WHGlobalHelper shareGlobalHelper]get:USER_INFO];
+    if ([response isKindOfClass:[WBAuthorizeResponse class]]) {
+        WBAuthorizeResponse* resp = (WBAuthorizeResponse*)response;
+        if (!myUserInfo) {
+            UserInfo* myUserInfo = [[UserInfo alloc]init];
+            [[WHGlobalHelper shareGlobalHelper]put:myUserInfo key:USER_INFO];
+        }
+        myUserInfo = [[WHGlobalHelper shareGlobalHelper]get:USER_INFO];
+        myUserInfo.wbUserID = resp.userID;
+        myUserInfo.wbTokenID = resp.accessToken;
+        [[NSNotificationCenter defaultCenter]postNotificationName:@"get_weibo_response" object:nil];
+    }
+    //    myUserInfo.
+    //    myUserInfo.wbUserID = response.userInfo objectForKey:(nonnull id)
 }
+
+
+-(void) onResp:(BaseResp*)resp{
+    if ([resp isKindOfClass:[SendAuthResp class]]) {
+        SendAuthResp* request = (SendAuthResp*)resp;
+        NSString* code = request.code;
+//        ASIFormDataRequest* request = [[ASIFormDataRequest alloc] initWithURL:nil];
+        
+        
+    }
+}
+
 
 - (void)applicationWillResignActive:(UIApplication *)application {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.

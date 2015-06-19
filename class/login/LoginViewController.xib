@@ -7,6 +7,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="LoginViewController">
             <connections>
+                <outlet property="btnFogetPsw" destination="HTC-hg-fi9" id="qgV-Cv-Hdl"/>
                 <outlet property="btnLogin" destination="q5s-oL-STv" id="e9Z-lQ-ydi"/>
                 <outlet property="btnLoginQQ" destination="Vc7-kF-ggr" id="62M-wa-VGj"/>
                 <outlet property="btnLoginWeChat" destination="3sw-7U-kNb" id="dam-9f-NHa"/>

@@ -29,7 +29,7 @@
 
 #define kNavigationBarHighLightColor [UIColor colorWithRed:136.f/255.f green:136.f/255.f blue:136.f/255.f alpha:1.f]
 
-@interface MyViewController ()
+@interface MyViewController ()<UITextFieldDelegate>
 @property(nonatomic,strong)NSString* leftNormalImageName;
 @end
 
@@ -515,6 +515,15 @@
 {
     
 }
+
+-(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
+    for (UIView* subView in [self.view subviews]) {
+        if ([subView isKindOfClass:[UITextField class]]) {
+            [subView resignFirstResponder];
+        }
+    }
+}
+
 
 #pragma mark - QuickUI - LifeCycle
 

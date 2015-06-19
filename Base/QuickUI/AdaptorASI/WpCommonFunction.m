@@ -1360,54 +1360,6 @@
     return phoneStr;
 }
 
-#pragma mark - 10分钟后和48小时候后的相关操作
-// 10分钟后：验证手势密码
-// 48小时候，验证手势密码，若处在登录页，需要跳转登录
-//+ (BOOL) operationWithLeaveUnused:(NSString *)serversTime :(NSString *)operationTypeString
-//{
-//    BOOL isVertity = NO;
-//    
-//    int timeTag = [WpCommonFunction compareTimeInterval:serversTime :operationTypeString];
-//    
-//    // timeTag == 0 不做操作
-//    
-//    if (timeTag == 1 || timeTag == 2 || kShareAppDelegate.isFinishLaunching)
-//    {
-//        kShareAppDelegate.isFinishLaunching = NO;
-//        // 获取memberID
-//        
-//        // 考虑到一种情况：微博账号登录，会返回用户的memberID，此时用户并没有登录，不需要弹出手势密码
-//        // 对于弹出手势密码以上情况忽略，直接取本地保存的memberID
-//        
-//        NSString *memberID = [[WpCommonFunction getCookiesAndMemberIDFromLocal] firstObject];
-//        
-//        if (!memberID)
-//        {
-//            return isVertity;
-//        }
-//        
-//        if ([WHCacheGestPassword needHandleGestpsw:memberID] == kGesturePasswordVerify)
-//        {
-//            [[ViewControllerManager sharedManager] launchVerifyGesturePswViewController];
-//            
-//            isVertity = YES;
-//        }
-//        else
-//        {
-//            [WCFGestureTimer sharedTimer].isInvalidateTimerMark = YES;
-//        }
-//        
-//        if (timeTag == 2)
-//        {
-//            // 判断是否需要登录
-//            // 判断当前页面是否需要登录
-//            isVertity = YES;
-//        }
-//    }
-//    
-//    return isVertity;
-//}
-
 // 根据服务器的时间做对应的操作
 // 将最新的服务器时间保存在本地，同时计算2次请求时间的差距
 #pragma mark - 比较保存在本地的时间和服务器的时间
@@ -1461,111 +1413,7 @@
     }
 }
 
-#pragma mark - 登录成功后缓存数据，并跳转页面
-//+ (void) loginSuccessedOperation:(UIViewController *)viewController
-//{
-//    // 用户绘制手势密码后，登录成功，未绘制手势密码则登录失败
-//    // 手势密码绘制成功，用户登录成功
-//    // 登录成功(手势密码也设置)后，将cookie保存在本地
-//    WCFUser *wcfUser = [WCFUser sharedUser];
-//    
-//    wcfUser.userLoggedInTag = @"1";
-//    
-//    [WpCommonFunction saveAccountMobileToLocalData:wcfUser.mobile :wcfUser.memberId];
-//    
-//    [WpCommonFunction saveCookiesAndMemberIDToLocal];
-//    
-//    
-//    {
-//        // 登录成功，pop回phjmain的前一页面，同时跳转到新的页面
-//        
-//        // 是否有phjMain页面
-//        BOOL hasPhjMainController = NO;
-//        
-//        NSUInteger phjMainControllerIndex = 0;
-//        
-//        NSArray *navCtrlArray = viewController.navigationController.viewControllers;
-//        
-//        // 当前nav controller中是否有交易页，若有则跳转回（pop）交易页，若无，如下操作（push）
-//        for (UIViewController *popController in navCtrlArray)
-//        {
-//            if ([popController isMemberOfClass:[CPBPHJMainViewController class]])
-//            {
-//                // 有phjMain页面，标记为YES，同时记录索引index
-//                hasPhjMainController = YES;
-//                
-//                phjMainControllerIndex = [navCtrlArray indexOfObject:popController];
-//                
-//                break;
-//            }
-//        }
-//        
-//        if (hasPhjMainController)
-//        {
-//            UIViewController *poptoController = [navCtrlArray objectAtIndex:phjMainControllerIndex - 1];
-//            
-//            // 有phjMain页面，pop到这个的前一页面
-//            [viewController.navigationController popToViewController:poptoController animated:NO];
-//           
-//            // 根据procuctType加载一个新的phjMain页面
-//            NSString *productType = [RESideMenu getSelect];
-//            
-//            if (productType)
-//            {
-//                // 已选择，去产品交易页
-//                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.01 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-//                    [[ViewControllerManager sharedManager] launchPHJMainViewController:poptoController withProductType:[productType integerValue]];
-//                });
-//                
-//                // [[ViewControllerManager sharedManager] launchPHJMainViewController:poptoController withProductType:[productType integerValue]];
-//                
-//                return;
-//            }
-//        }
-//    }
-//    
-//    // 若查看过引导页，跳产品列表选择也
-//    if ([WpCommonFunction getDeviceDoesLookoverGuidePageFromLocal])
-//    {
-//        // 是否选择过产品，选择过，跳产品页
-//        
-//        NSString *productType = [RESideMenu getSelect];
-//        
-//        
-//        if (productType)
-//        {
-//            // 已选择，去产品交易页
-//            [[ViewControllerManager sharedManager] launchPHJMainViewController:viewController withProductType:[productType integerValue]];
-//        }
-//        else
-//        {
-//            // 未选择，去产品列表页
-//            [[ViewControllerManager sharedManager] launchOrderCategoryController:viewController];
-//        }
-//    }
-//    else
-//    {
-//        // 没看过，去引导页
-//        [[ViewControllerManager sharedManager] launchIntroduceViewController:viewController];
-//    }
-//}
 
-#pragma mark - 检查是否设置了手势密码
-//+ (void) checkoutGesturePassword:(id<WHGesturePswDrawedResultDelegate>)parentViewController;
-//{
-//    int result = [WHCacheGestPassword needHandleGestpsw:[WCFUser sharedUser].memberId];
-//    
-//    if (result == kGesturePasswordCreate || result == kGesturePasswordReset)
-//    {
-//        // 需要创建手势密码或者需要重设手势密码，跳转绘制手势密码页
-//        [[ViewControllerManager sharedManager] launchDrawPswViewController:parentViewController andDrawType:kDrawGesturePswTypeCreate];
-//    }
-//    else
-//    {
-//        // 不用跳转手势密码绘制页，登录成功
-//        [WpCommonFunction loginSuccessedOperation:(UIViewController *)parentViewController];
-//    }
-//}
 
 +(NSString*)changeDateFomat:(NSString*)date DateMark:(NSString*)mark{
     NSDate *confromTimesp = [NSDate dateWithTimeIntervalSince1970:[date doubleValue]];
@@ -1652,6 +1500,28 @@
     return str;
 }
 
++(BOOL)userHasLogined{
+    NSString* tokenId = [[NSUserDefaults standardUserDefaults]valueForKey:USER_TOKENID];
+    if (tokenId) {
+        return true;
+    }
+    return false;
+}
+
++(id)toArrayOrNSDictionary:(NSData *)jsonData{
+    NSError *error = nil;
+    id jsonObject = [NSJSONSerialization JSONObjectWithData:jsonData
+                                                    options:NSJSONReadingAllowFragments
+                                                      error:&error];
+    
+    if (jsonObject != nil && error == nil){
+        return jsonObject;
+    }else{
+        // 解析错误
+        return nil;
+    }
+    
+}
 
 
 @end

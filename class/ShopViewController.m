@@ -8,7 +8,8 @@
 
 #import "ShopViewController.h"
 
-@interface ShopViewController ()
+@interface ShopViewController ()<UIWebViewDelegate>
+@property (weak, nonatomic) IBOutlet UIWebView *viewWeb;
 
 @end
 
@@ -17,6 +18,10 @@
 - (void)viewDidLoad {
     self.navigationBarTitle = @"商城";
     [super viewDidLoad];
+    self.viewWeb.delegate = self;
+    NSURL* url = [NSURL URLWithString:@"http://test.flyco.com"];
+    NSURLRequest* request=[NSURLRequest requestWithURL:url];
+    [self.viewWeb loadRequest:request];
     // Do any additional setup after loading the view from its nib.
 }
 

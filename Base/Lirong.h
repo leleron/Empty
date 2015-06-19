@@ -36,6 +36,7 @@
 //#import "AppDelegate.h"
 
 #import "MobClick.h"
+#import "UserInfo.h"
 //#import "WHActionSheetManager.h"
 
 #endif

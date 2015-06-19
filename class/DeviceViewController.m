@@ -17,7 +17,7 @@
 #import "VideoController.h"
 #import "WToast.h"
 #import "AppDelegate.h"
-
+#import "LoginViewController.h"
 DeviceViewController* instance;
 
 @interface DeviceViewController ()
@@ -145,6 +145,14 @@ DeviceViewController* instance;
 {
     AppDelegate *delegate = [UIApplication sharedApplication].delegate;
     delegate.camDID = @"";
+    UserInfo* myUserInfo = [[WHGlobalHelper shareGlobalHelper]get:USER_INFO];
+    //判断用户是否已经登陆
+    if (!myUserInfo) {
+        LoginViewController* controller = [[LoginViewController alloc]initWithNibName:@"LoginViewController" bundle:nil];
+        self.tabBarController.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:controller animated:YES];
+        
+    }else{
     
     ifAdd = !ifAdd;
     NSArray *titleArray = [[NSArray alloc] initWithObjects:SAO_YI_SAO,ADD_DEVICE, nil];
@@ -161,6 +169,7 @@ DeviceViewController* instance;
     {
         [drop hideDropDown:addButton];
         drop = nil;
+    }
     }
 }
 

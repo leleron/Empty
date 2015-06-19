@@ -1,15 +1,14 @@
 //
-//  loginEntity.h
+//  forgetPswEntity.h
 //  Empty
 //
-//  Created by leron on 15/6/9.
+//  Created by leron on 15/6/19.
 //  Copyright (c) 2015年 李荣. All rights reserved.
 //
 
 #import "QUEntity.h"
 
-@interface loginEntity : QUEntity
+@interface forgetPswEntity : QUEntity
 @property(strong,nonatomic)NSString* status;
 @property(strong,nonatomic)NSString* message;
-@property(strong,nonatomic)NSString* tokenId;
 @end

@@ -195,7 +195,7 @@
 // 检查是否设置了手势密码
 //+ (void) checkoutGesturePassword:(id<WHGesturePswDrawedResultDelegate>)parentViewController;
 
-#pragma mark - 获取微操盘H5 Url
+#pragma mark - 获取H5 Url
 +(NSString*)getWCPH5Url:(NSString*)urlAction;
 
 +(NSString*)changeDateFomat:(NSString*)date DateMark:(NSString*)mark;
@@ -211,5 +211,9 @@
 #pragma mark - 日期加小数点
 +(NSString*)DateFormat:(NSString*)date;
 
+//判断用户是否登陆
++(BOOL)userHasLogined;
 
+//json转数组或字典
++(id)toArrayOrNSDictionary:(NSData *)jsonData;
 @end

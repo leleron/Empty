@@ -9,6 +9,14 @@
 #import <UIKit/UIKit.h>
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
+typedef enum {
+    LOGIN_WEIBO = 1,
+    LOGIN_QQ,
+    LOGIN_WECHAT,
+    LOGIN_ZFB,
+    LOGIN_JD,
+    LOGIN_PHONE,
+}loginType;
 
 @property (strong, nonatomic) UIWindow *window;
 @property(strong,nonatomic)MyViewController* topController;

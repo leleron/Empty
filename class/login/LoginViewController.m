@@ -13,7 +13,9 @@
 #import "WXApi.h"
 #import "RegisterViewController.h"
 #import "loginMock.h"
-@interface LoginViewController ()<TencentSessionDelegate,WBHttpRequestDelegate,WXApiDelegate>
+#import "UserInfo.h"
+#import "forgetPswViewController.h"
+@interface LoginViewController ()<TencentSessionDelegate,WBHttpRequestDelegate,WXApiDelegate,WeiboSDKDelegate>
 @property (weak, nonatomic) IBOutlet UIButton *btnLoginQQ;
 @property (weak, nonatomic) IBOutlet UIButton *btnLoginWeChat;
 @property (weak, nonatomic) IBOutlet UIButton *btnLoginWeibo;
@@ -22,9 +24,11 @@
 @property (weak, nonatomic) IBOutlet UITextField *textPhoneNum;
 
 @property (weak, nonatomic) IBOutlet UITextField *textPsw;
+@property (weak, nonatomic) IBOutlet UIButton *btnFogetPsw;
 
 @property(strong,nonatomic)TencentOAuth* tencentOAuth;
 @property(strong,nonatomic)NSArray* permissions;
+@property(strong,nonatomic)WBAuthorizeRequest* request;
 @property(strong,nonatomic)loginMock* myLoginMock;
 
 @property(strong,nonatomic)NSString* phoneNum;      //保存的手机号
@@ -42,10 +46,16 @@
     [self.btnLoginWeibo addTarget:self action:@selector(loginWithWeibo) forControlEvents:UIControlEventTouchUpInside];
     [self.btnRegister addTarget:self action:@selector(gotoRegister) forControlEvents:UIControlEventTouchUpInside];
     [self.btnLogin addTarget:self action:@selector(gotoLogin) forControlEvents:UIControlEventTouchUpInside];
+    [self.btnFogetPsw addTarget:self action:@selector(gotoForgetPsw) forControlEvents:UIControlEventTouchUpInside];
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(postWeiboUserInfo) name:@"get_weibo_response" object:nil];
     // Do any additional setup after loading the view.
     
 }
 
+-(void)initQuickUI{
+    self.textPsw.delegate = self;
+    self.textPhoneNum.delegate = self;
+}
 -(void)initQuickMock{
     self.myLoginMock = [loginMock mock];
     self.myLoginMock.delegate = self;    
@@ -74,10 +84,16 @@
     }
 }
 
+-(void)gotoForgetPsw{
+    forgetPswViewController* controller = [[forgetPswViewController alloc]initWithNibName:@"forgetPswViewController" bundle:nil];
+    [self.navigationController pushViewController:controller animated:YES];
+}
+
+
 -(void)loginWithQQ{
     AppDelegate* delegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
     delegate.login_type = LOGIN_QQ;
-    _tencentOAuth = [[TencentOAuth alloc] initWithAppId:@"1104617507"andDelegate:self];
+    _tencentOAuth = [[TencentOAuth alloc] initWithAppId:@"1104692486"andDelegate:self];
     _permissions =  [NSArray arrayWithObjects:@"get_user_info", @"get_simple_userinfo", @"add_t", nil];
     [_tencentOAuth authorize:_permissions inSafari:NO];
 }
@@ -95,11 +111,23 @@
 -(void)loginWithWeibo{
     AppDelegate* delegate = (AppDelegate*)[UIApplication sharedApplication].delegate;
     delegate.login_type = LOGIN_WEIBO;
-    WBAuthorizeRequest* request = [[WBAuthorizeRequest alloc]init];
-    request.redirectURI = SinaRedirectURI;
-    request.scope = @"all";
+    self.request = [[WBAuthorizeRequest alloc]init];
+    self.request.redirectURI = SinaRedirectURI;
+    self.request.scope = @"all";
 //    request.userInfo = @{@"SSO_From":@"SendMessageToWeiboViewController",}
-    [WeiboSDK sendRequest:request];
+    [WeiboSDK sendRequest:self.request];
+}
+
+-(void)postWeiboUserInfo{
+    UserInfo* myUserInfo = [[WHGlobalHelper shareGlobalHelper]get:USER_INFO];
+    NSNumber *userID = [NSNumber numberWithInteger:[myUserInfo.wbUserID integerValue]];
+    NSDictionary* param = @{@"access_token":myUserInfo.wbTokenID,@"uid":userID};
+    NSString* url = @"https://api.weibo.com/2/users/show.json";
+//   [WBHttpRequest requestWithAccessToken:myUserInfo.wbTokenID url:url httpMethod:@"GET" params:param delegate:self withTag:nil];
+    NSString* sendMethod = @"GET";
+    [WBHttpRequest requestWithURL:url httpMethod:sendMethod params:param delegate:self withTag:nil];
+    
+
 }
 
 #pragma mark QQ登陆delelgate
@@ -112,6 +140,8 @@
         //  记录登录用户的OpenID、Token以及过期时间
 //        _labelAccessToken.text = _tencentOAuth.accessToken;
         NSLog(@"%@",_tencentOAuth.accessToken);
+        [_tencentOAuth getUserInfo];
+        
     }
     else
     {
@@ -119,6 +149,19 @@
         NSLog(@"登录不成功 没有获取accesstoken");
     }
 }
+- (void)getUserInfoResponse:(APIResponse*) response{
+    UserInfo *myUserInfo = [[UserInfo alloc]init];
+
+    myUserInfo.nickName = [response.jsonResponse objectForKey:@"nickname"];
+    NSData* userHeadData = [NSData dataWithContentsOfURL:[NSURL URLWithString:[response.jsonResponse objectForKey:@"figureurl_qq_2"]]];
+    myUserInfo.headImg = [UIImage imageWithData:userHeadData];
+    myUserInfo.userLoginType = LOGIN_QQ;
+    [[WHGlobalHelper shareGlobalHelper]put:myUserInfo key:USER_INFO];
+    [self.navigationController popViewControllerAnimated:YES];
+//    self.myUserInfo.headImg = [UIIm]
+}
+
+
 
 -(void)tencentDidNotLogin:(BOOL)cancelled
 {
@@ -141,10 +184,22 @@
 }
 
 #pragma mark 微博delegate
+
+
+-(void)request:(WBHttpRequest *)request didReceiveResponse:(NSURLResponse *)response{
+    
+}
+
+
+
+
+
+
 -(void)request:(WBHttpRequest *)request didFinishLoadingWithResult:(NSString *)result{
     NSString* title = nil;
     UIAlertView* alert = nil;
     title = @"收到网络回调";
+    NSLog(@"lirong:%@",request);
     alert = [[UIAlertView alloc]initWithTitle:title message:result delegate:self cancelButtonTitle:@"确定" otherButtonTitles: nil];
     [alert show];
 }
@@ -156,8 +211,14 @@
     [alert show];
 }
 
+
+
 #pragma mark 微信登陆delegate
 -(void) onReq:(BaseReq*)req{
+    
+}
+
+-(void) onResp:(BaseResp*)resp{
     
 }
 
@@ -167,11 +228,22 @@
     if ([mock isKindOfClass:[loginMock class]]) {
         loginEntity* e = (loginEntity*)entity;
         if ([e.status isEqualToString:@"SUCCESS"]) {
-            [[WHGlobalHelper shareGlobalHelper]put:self.phoneNum key:USER_PHONENUMBER];
+            UserInfo* myUserInfo = [[UserInfo alloc]init];
+            myUserInfo.phoneNum = self.phoneNum;
+            myUserInfo.tokenID = e.tokenId;
+            myUserInfo.userLoginType = LOGIN_PHONE;
+            [[WHGlobalHelper shareGlobalHelper]put:myUserInfo key:USER_INFO];
             [self.navigationController popViewControllerAnimated:YES];
         }
     }
 }
+
+
+
+//-(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
+//    [self.textPhoneNum resignFirstResponder];
+//    [self.textPsw resignFirstResponder]
+//}
 
 /*
 #pragma mark - Navigation
